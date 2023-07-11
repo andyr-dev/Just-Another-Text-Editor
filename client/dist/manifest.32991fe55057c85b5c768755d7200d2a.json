@@ -1,0 +1,18 @@
+{
+  "icons": [
+    {
+      "src": "auto/icon_512x512.3ca11a97eb7d90b61fc3db0f3c5dcdb6.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "name": "Installer Manifest Example",
+  "short_name": "Manifest",
+  "orientation": "portrait",
+  "display": "standalone",
+  "start_url": "./",
+  "description": "install the app",
+  "background_color": "#7eb4e2",
+  "theme_color": "#7eb4e2"
+}

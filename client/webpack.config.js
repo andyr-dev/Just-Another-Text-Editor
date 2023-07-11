@@ -1,74 +1,84 @@
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const WebpackPwaManifest = require('webpack-pwa-manifest');
-const path = require('path');
-const { InjectManifest } = require('workbox-webpack-plugin');
-const GenerateSW = require('webpack-generate-sw');
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const WebpackPwaManifest = require("webpack-pwa-manifest");
+const path = require("path");
+const { InjectManifest, GenerateSW } = require("workbox-webpack-plugin");
+// const swCachePlugin = require("sw-cache-plugin");
+
 
 // TODO: Add and configure workbox plugins for a service worker and manifest file.
 // TODO: Add CSS loaders and babel to webpack.
 
 module.exports = () => {
   return {
-    mode: 'development',
+    mode: "development",
     entry: {
-      main: './src/js/index.js',
-      install: './src/js/install.js'
+      main: "./src/js/index.js",
+      install: "./src/js/install.js",
     },
     output: {
-      filename: '[name].bundle.js',
-      path: path.resolve(__dirname, 'dist'),
+      filename: "[name].bundle.js",
+      path: path.resolve(__dirname, "dist"),
     },
     plugins: [
       new HtmlWebpackPlugin({
-        template: './index.html',
-        title: 'Jate'
+        template: "./index.html",
+        title: "jate",
       }),
 
       new GenerateSW(),
 
-      new WebpackPwaManifest(
-        {
-          "short_name": "Manifest",
-          "name": "Installer Manifest Example",
-          "icons": [
-            {
-              "src": "./assets/images/logo.png",
-              "type": "image/png",
-              "sizes": "512x512",
-              "purpose": "any maskable"
-            }
-          ],
-          "orientation": "portrait",
-          "display": "standalone",
-          "start_url": "./",
-          "description": "install the app",
-          "background_color": "#7eb4e2",
-          "theme_color": "#7eb4e2"
-        }
-        ), 
-      
+      new InjectManifest({
+        swSrc: "./src-sw.js",
+        swDest: "src-sw.js",
+      }),
+
+      new WebpackPwaManifest({
+        fingerprints: false,
+        inject: true,
+        name: "jate",
+        short_name: "jate",
+        description: "Just Another Text Editor",
+        background_color: "#225ca3",
+        theme_color: "#225ca3",
+        start_url: "./",
+        publicPath: "./",
+        icons: [
+          {
+            src: path.resolve("src/images/logo.png"),
+            sizes: [96, 128, 192, 256, 384, 512],
+            destination: path.join("assets", "icons"),
+          },
+        ],
+      }),
+      // new swCachePlugin({
+      //   cacheName: "assetCache",
+      //   ignore: [/.*\.map$/, /boot.*/],
+      //   include: ["/", "/other"],
+      // }),
     ],
 
     module: {
       rules: [
         {
           test: /\.css$/i,
-          use: ['style-loader', 'css-loader'],
+          use: ["style-loader", "css-loader"],
         },
         {
           test: /\.m?js$/,
           exclude: /node_modules/,
           use: {
-            loader: 'babel-loader',
+            loader: "babel-loader",
             options: {
-              presets: ['@babel/preset-env'],
-              plugins: ['@babel/plugin-proposal-object-rest-spread', '@babel/transform-runtime'],
+              presets: ["@babel/preset-env"],
+              plugins: [
+                "@babel/plugin-proposal-object-rest-spread",
+                "@babel/transform-runtime",
+              ],
             },
           },
         },
-        
       ],
     },
   };
 };
-``
+``;
