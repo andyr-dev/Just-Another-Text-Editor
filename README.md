@@ -1,13 +1,12 @@
 # Just Another Text Editor
 
-  ![put the image here!]
+  ![](./assets/jate.png)
   
   ![MIT License](https://img.shields.io/badge/license-MIT-blueviolet)
   
   ## Description
   
-  JATE is a PWA (Progressive Web App) that can be installed from the browser and will allow you to use the text editor both online and offline
-
+  JATE is a PWA (Progressive Web App) that can be installed from the browser and will allow you to use the text editor both online and offline to write code!
 
    <br/>
 
@@ -29,7 +28,7 @@
 
   ## Usage
 
-  Access the PWA at <enter link here> and click install to use offline
+  Access the PWA by clicking this [link](https://jate-texteditor1-5f61b91974cb.herokuapp.com/) and click install to use offline
 
   <br/>
   
@@ -59,9 +58,9 @@
 
   ## How to Contribute
 
-  nothing
+No contributions at this time
 
   <br/>
   
   ## Test
-      n.a
+  N/A
